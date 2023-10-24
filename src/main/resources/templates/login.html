@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đăng Nhập | CTCA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS ================================================== -->
+    <link rel="stylesheet" th:href="@{/resources/front/plugins/css/plugins.css}">
+    <!-- Custom style -->
+    <link th:href="@{/resources/front/css/style.css}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" id="jssDefault" th:href="@{/resources/front/css/colors/green-style.css}">
+</head>
+<body>
+
+<div class="wrapper">
+    <!-- Title Header Start -->
+    <section class="login-screen-sec">
+        <div class="container">
+            <div class="login-screen">
+                <a href="/"><img th:src="@{/resources/front/img/logo.png}" class="img-responsive" alt=""></a>
+
+                <form th:action="@{/login}" method="post">
+                    <input type="email" class="form-control" placeholder="Tên Đăng Nhập" name="username">
+                    <input type="password" class="form-control" placeholder="Mật Khẩu" name="password">
+
+                    <p style="color: red" th:if="${error}">Tên đăng nhập hoặc mật khẩu sai!</p>
+
+                    <button class="btn btn-login mb-10" type="submit">Đăng Nhập</button>
+                    <span>Bạn chưa có tài khoản? <a href="/register"> Tạo tài khoản</a></span>
+                    <span><a href="/forgot-password"> Quên Mật Khấu</a></span>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Scripts
+   ================================================== -->
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/viewportchecker.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootsnav.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/select2.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/wysihtml5-0.3.0.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap-wysihtml5.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/datedropper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/dropzone.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/loader.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/owl.carousel.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/slick.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/gmap3.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.easy-autocomplete.min.js}"></script>
+
+<!-- Custom Js -->
+<script th:src="@{/resources/front/js/custom.js}"></script>
+<script th:src="@{/resources/front/js/jQuery.style.switcher.js}"></script>
+</body>
+</html>

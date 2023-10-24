@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- footer area start -->
+<th:block th:fragment="header">
+    <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
+        <div class="container">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i
+                    class="fa fa-bars"></i></button>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img th:src="@{/resources/front/img/logo-white.png}" class="logo logo-display" alt="">
+                    <img th:src="@{/resources/front/img/logo-white.png}" class="logo logo-scrolled" alt="">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                    <th:block th:if="${userLogin == null}">
+                        <li class="left-br">
+                            <a href="/login" class="signin">Đăng Nhập</a>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${userLogin != null}">
+                        <li class="left-br">
+                            <a href="/logout" class="signin">Đăng Xuất</a>
+                        </li>
+                    </th:block>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i>Trang Chủ</a></li>
+                    <li><a href="/post"><i class="fa fa-pencil" aria-hidden="true"></i>Bài Đăng</a></li>
+                    <li><a href="/charity"><i class="fa fa-tags" aria-hidden="true"></i>Từ Thiện</a></li>
+                    <th:block th:if="${userLogin == null}">
+                        <li><a href="/register"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Ký</a></li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="clearfix"></div>
+    <!-- footer area end -->
+</th:block>
+</body>
+</html>

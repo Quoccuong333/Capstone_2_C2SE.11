@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đăng Ký | CTCA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS ================================================== -->
+    <link rel="stylesheet" th:href="@{/resources/front/plugins/css/plugins.css}">
+    <!-- Custom style -->
+    <link th:href="@{/resources/front/css/style.css}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" id="jssDefault" th:href="@{/resources/front/css/colors/green-style.css}">
+
+    <style>
+        .detail-desc {
+            margin: 300px auto;
+        }
+        .detail-pic img {
+            width: 80px;
+            height: 80px;
+            margin: auto;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+        .detail-pic {
+            width: 100px;
+            height: 100px;
+        }
+        .detail-desc-caption h4 {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <section class="detail-desc">
+        <div class="container white-shadow">
+            <div class="row mrg-0">
+                <div class="detail-pic">
+                    <a href="/"><img th:src="@{/resources/front/img/logo.png}" style="object-fit: contain;" class="img-responsive" alt=""></a>
+                </div>
+            </div>
+            <div class="row bottom-mrg mrg-0">
+                <div class="col-md-12 col-sm-12">
+                    <div class="detail-desc-caption">
+                        <h4 class="text-center" >ĐĂNG KÝ TÀI KHOẢN</h4>
+                    </div>
+                    <div class="detail-desc-skill">
+                        <p class="text-center">
+                            Chúc mừng <b th:text="${accountDTO.email}"></b> đã đăng ký tài khoản thành công! Vui lòng nhấn vào
+                            đường dẫn bên dưới để đăng nhập.
+                        </p>
+                        <p class="mb-0 text-center">
+                            <a href="/login" style="color: #35434e" class="text-center">Đăng nhập tại đây!</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Scripts
+   ================================================== -->
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/viewportchecker.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootsnav.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/select2.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/wysihtml5-0.3.0.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap-wysihtml5.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/datedropper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/dropzone.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/loader.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/owl.carousel.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/slick.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/gmap3.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.easy-autocomplete.min.js}"></script>
+
+<!-- Custom Js -->
+<script th:src="@{/resources/front/js/custom.js}"></script>
+<script th:src="@{/resources/front/js/jQuery.style.switcher.js}"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- create-job41:39-->
+<head>
+    <title>Charity - CTCA </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS==================================================-->
+    <link rel="stylesheet" th:href="@{/resources/front/plugins/css/plugins.css}">
+    <link th:href="@{/resources/front/css/style.css}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" id="jssDefault" th:href="@{/resources/front/css/colors/green-style.css}">
+
+</head>
+<body>
+<div class="Loader"></div>
+<div class="wrapper">
+
+    <div class="clearfix"></div>
+
+    <!-- Header Title Start -->
+    <section class="inner-header-title blank">
+        <div class="container">
+            <h1>Tạo Chương Trình Từ Thiện</h1>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+    <!-- Header Title End -->
+
+    <!-- General Detail Start -->
+    <div class="detail-desc section">
+        <div class="container white-shadow">
+
+            <div class="row">
+                <div class="detail-pic js">
+                    <div class="box">
+                        <input type="file" name="upload-pic[]" id="upload-pic" class="inputfile"/>
+                        <label for="upload-pic"><i class="fa fa-upload" aria-hidden="true"></i><span></span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bottom-mrg">
+                <form class="add-feild">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Job Title">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Your Email">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <select class="form-control input-lg">
+                                <option>Job Type</option>
+                                <option>Full Time</option>
+                                <option>Part Time</option>
+                                <option>Freelancer</option>
+                                <option>Internship</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Location,e.g. London Quel Mark">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
+                        <textarea class="form-control" placeholder="Job Description"></textarea>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="row no-padd">
+                <div class="detail pannel-footer">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="detail-pannel-footer-btn pull-right">
+                            <a href="#" class="footer-btn choose-cover">Choose Cover Image</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+                <button class="btn btn-success btn-primary small-btn">Submit your company</button>
+            </div>
+
+        </div>
+    </div>
+    <!-- General Detail End -->
+
+    <!-- Footer Section Start -->
+    <div th:replace="~{fragments/front/footer :: footer}"></div>
+    <div class="clearfix"></div>
+    <!-- Footer Section End -->
+
+    <button class="w3-button w3-teal w3-xlarge w3-right" onclick="openRightMenu()"><i class="spin fa fa-cog"
+                                                                                      aria-hidden="true"></i></button>
+    <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-right" style="display:none;right:0;" id="rightMenu">
+        <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+        <ul id="styleOptions" title="switch styling">
+            <li>
+                <a href="javascript: void(0)" class="cl-box blue" data-theme="colors/blue-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box red" data-theme="colors/red-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box purple" data-theme="colors/purple-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box green" data-theme="colors/green-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box dark-red" data-theme="colors/dark-red-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box orange" data-theme="colors/orange-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box sea-blue" data-theme="colors/sea-blue-style "></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box pink" data-theme="colors/pink-style"></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Scripts
+    ================================================== -->
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/viewportchecker.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootsnav.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/select2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/wysihtml5-0.3.0.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap-wysihtml5.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/datedropper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/dropzone.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/loader.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/owl.carousel.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/slick.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/gmap3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.easy-autocomplete.min.js}"></script>
+    <script th:src="@{/resources/front/js/custom.js}"></script>
+    <script th:src="@{/resources/front/js/jQuery.style.switcher.js}"></script>
+
+    <script>
+        $('#company-dob').dateDropper();
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#styleOptions').styleSwitcher();
+        });
+    </script>
+    <script>
+        function openRightMenu() {
+            document.getElementById("rightMenu").style.display = "block";
+        }
+
+        function closeRightMenu() {
+            document.getElementById("rightMenu").style.display = "none";
+        }
+    </script>
+</div>
+</body>
+</html>

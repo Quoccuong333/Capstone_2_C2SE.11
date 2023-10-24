@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Bài Đăng - CTCA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS==================================================-->
+    <link rel="stylesheet" th:href="@{/resources/front/plugins/css/plugins.css}">
+    <link th:href="@{/resources/front/css/style.css}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" id="jssDefault" th:href="@{/resources/front/css/colors/green-style.css}">
+
+</head>
+<body>
+<div th:replace="~{fragments/front/header :: header}"></div>
+<div class="Loader"></div>
+<div class="wrapper">
+    <div class="clearfix"></div>
+
+    <!-- Title Header Start -->
+    <section class="inner-header-title" th:style="'background-image: url(\'' + @{/resources/front/img/banner-10.jpg} + '\');'">
+        <div class="container">
+            <h1>Bài Đăng</h1>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+    <!-- Title Header End -->
+
+    <!-- Candidate Profile Start -->
+
+    <section class="full-detail-description full-detail gray-bg">
+        <div class="container">
+            <div class="col-md-12 col-sm-12" th:action="@{/back/post/postName}"
+                 th:object="${postDTO}">
+                <div class="full-card">
+                    <div class="deatil-tab-employ tool-tab">
+                        <ul class="nav simple nav-tabs" id="simple-design-tab">
+                            <li class="active"><a href="#about">Nội Dung</a></li>
+                            <li><a href="#messages">Nhắn Tin <span class="info-bar">6</span></a></li>
+                        </ul>
+
+                        <!-- Start All Sec -->
+                        <div class="tab-content">
+                            <div id="about" class="tab-pane fade in active">
+                                <h3>Nội Dung Bài Đăng</h3>
+
+                                <ul class="job-detail-des">
+                                    <li><span>Tác Giả:</span> <a th:text="${ownerDTO?.fullName}"></a></li>
+                                    <li><span>Ghi Chú:</span> <a th:text="${postDTO.note}"></a></li>
+                                </ul>
+
+                                <p th:utext="${postDTO.description}"></p>
+                            </div>
+                            <!-- End About Sec -->
+
+                            <!-- Start Message -->
+                            <div id="messages" class="tab-pane fade">
+                                <div class="inbox-body inbox-widget">
+                                    <div class="mail-card">
+                                        <header class="card-header cursor-pointer collapsed" data-toggle="collapse" data-target="#full-message" aria-expanded="false">
+                                            <div class="card-title flexbox">
+                                                <img class="img-responsive img-circle avatar" th:src="@{/resources/front/img/can-1.png}" alt="...">
+                                                <div>
+                                                    <h6>Daniel Duke</h6>
+                                                    <small>Today at 07:34 AM</small>
+                                                    <small><a class="text-info collapsed" href="#detail-view" data-toggle="collapse" aria-expanded="false">View Detail</a></small>
+
+                                                    <div class="no-collapsing cursor-text collapse" id="detail-view" aria-expanded="false" style="height: 0px;">
+                                                        <small class="d-inline-block">From:</small>
+                                                        <small>theadmin@thetheme.io</small>
+                                                        <br>
+                                                        <small class="d-inline-block">To:</small>
+                                                        <small>subscriber@yahoo.com</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </header>
+                                        <div class="collapse" id="full-message" aria-expanded="false" style="height: 0px;">
+                                            <div class="card-body">
+                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia.</p>
+                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mail-card unread">
+                                        <header class="card-header cursor-pointer collapsed" data-toggle="collapse" data-target="#meaages-2" aria-expanded="false">
+                                            <div class="card-title flexbox">
+                                                <img class="img-responsive img-circle avatar" th:src="@{/resources/front/img/can-2.png}" alt="...">
+                                                <div>
+                                                    <h6>Daniel Duke</h6>
+                                                    <small>Today at 07:34 AM</small>
+                                                    <small><a class="text-info collapsed" href="#detail-view1" data-toggle="collapse" aria-expanded="false">View Detail</a></small>
+
+                                                    <div class="no-collapsing cursor-text collapse" id="detail-view1" aria-expanded="false" style="height: 0px;">
+                                                        <small class="d-inline-block">From:</small>
+                                                        <small>theadmin@thetheme.io</small>
+                                                        <br>
+                                                        <small class="d-inline-block">To:</small>
+                                                        <small>subscriber@yahoo.com</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </header>
+                                        <div class="collapse" id="meaages-2" aria-expanded="false" style="height: 0px;">
+                                            <div class="card-body">
+                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia.</p>
+                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Message -->
+
+
+                        </div>
+                        <!-- Start All Sec -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Candidate Profile End -->
+
+    <!-- Footer Section Start -->
+
+    <div class="clearfix"></div>
+    <div th:replace="~{fragments/front/footer :: footer}"></div>
+    <!-- Footer Section End -->
+
+    <button class="w3-button w3-teal w3-xlarge w3-right" onclick="openRightMenu()"><i class="spin fa fa-cog" aria-hidden="true"></i></button>
+    <div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-right" style="display:none;right:0;" id="rightMenu">
+        <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+        <ul id="styleOptions" title="switch styling">
+            <li>
+                <a href="javascript: void(0)" class="cl-box blue" data-theme="colors/blue-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box red" data-theme="colors/red-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box purple" data-theme="colors/purple-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box green" data-theme="colors/green-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box dark-red" data-theme="colors/dark-red-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box orange" data-theme="colors/orange-style"></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box sea-blue" data-theme="colors/sea-blue-style "></a>
+            </li>
+            <li>
+                <a href="javascript: void(0)" class="cl-box pink" data-theme="colors/pink-style"></a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Scripts
+    ================================================== -->
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/viewportchecker.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootsnav.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/select2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/wysihtml5-0.3.0.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap-wysihtml5.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/datedropper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/dropzone.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/loader.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/owl.carousel.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/slick.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/gmap3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.easy-autocomplete.min.js}"></script>
+    <!-- Custom Js -->
+    <script th:src="@{/resources/front/js/custom.js}"></script>
+    <script th:src="@{/resources/front/js/jQuery.style.switcher.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#styleOptions').styleSwitcher();
+        });
+    </script>
+    <script>
+        function openRightMenu() {
+            document.getElementById("rightMenu").style.display = "block";
+        }
+
+        function closeRightMenu() {
+            document.getElementById("rightMenu").style.display = "none";
+        }
+    </script>
+</div>
+</body>
+
+<!-- candidate-profile41:39-->
+</html>

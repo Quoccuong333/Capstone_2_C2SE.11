@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Charity | CTCA</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/resources/back/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/resources/back/css/metisMenu.min.css}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/resources/back/css/startmin.css}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/resources/back/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- DataTables CSS -->
+    <link th:href="@{/resources/back/css/dataTables/dataTables.bootstrap.css}" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link th:href="@{/resources/back/css/dataTables/dataTables.responsive.css}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+
+<div id="wrapper">
+    <div th:replace="~{fragments/back/navbar :: navbar}"/>
+
+    <div th:replace="~{fragments/back/sidebar :: sidebar}"/>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Chương Trình Từ Thiện</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div
+                        class="alert alert-dismissible col-md-12"
+                        th:if="${messageDTO != null && messageDTO.key == 'save'}"
+                        th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}"
+                >
+                    <button
+                            type="button"
+                            class="close"
+                            data-dismiss="alert"
+                            aria-hidden="true"
+                    >
+                        &times;
+                    </button>
+                    <h5><i class="icon fa fa-exclamation-triangle"></i> Thông Báo</h5>
+                    <span th:text="${messageDTO.message}"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Thêm Chương Trình Từ Thiện
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form method="post"
+                                          enctype="multipart/form-data"
+                                          th:action="@{/back/charity/form}"
+                                          th:object="${charityDTO}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="inputId">Mã Chương Trình</label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputId"
+                                                           name="id"
+                                                           th:field="*{id}"
+                                                           disabled>
+                                                </div>
+                                                <div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'has-error' : ''">
+                                                    <label for="inputTitle"> Tiêu Đề<code>(*)</code></label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="inputTitle"
+                                                           name="title"
+                                                           th:field="*{title}" >
+                                                    <p
+                                                            class="text-danger"
+                                                            th:if="${#fields.hasErrors('title')}"
+                                                            th:errors="*{title}"
+                                                    ></p>
+                                                </div>
+                                                <div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'has-error' : ''">
+                                                    <label for="inputDescription">Mô Tả<code>(*)</code></label>
+                                                    <textarea class="form-control"
+                                                              id="inputDescription"
+                                                              name="description"
+                                                              th:field="*{description}" rows="5">
+                                                    </textarea>
+                                                    <p
+                                                            class="text-danger"
+                                                            th:if="${#fields.hasErrors('description')}"
+                                                            th:errors="*{description}"
+                                                    ></p>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" th:classappend="${#fields.hasErrors('startDate')} ? 'has-error' : ''">
+                                                            <label for="inputStartDate"> Từ Ngày</label>
+                                                            <input type="date"
+                                                                   class="form-control"
+                                                                   id="inputStartDate"
+                                                                   name="startDate"
+                                                                   th:field="*{startDate}">
+                                                            <p
+                                                                    class="text-danger"
+                                                                    th:if="${#fields.hasErrors('startDate')}"
+                                                                    th:errors="*{startDate}"
+                                                            ></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="inputEndDate">Đến Ngày</label>
+                                                            <input type="date"
+                                                                   class="form-control"
+                                                                   id="inputEndDate"
+                                                                   name="endDate"
+                                                                   th:field="*{endDate}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputImage"> Hình Ảnh <code>(*)</code></label>
+                                                        <input type="file" id="inputImage"
+                                                               class="form-control" name="avatarMul" accept="file">
+                                                        <img style="width: 150px; display: block; " th:src="@{${charityDTO.image}}" alt="">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="inputNote">Ghi Chú</label>
+                                                        <textarea class="form-control"
+                                                                  id="inputNote"
+                                                                  name="note"
+                                                                  th:field="*{note}" rows="5">
+                                                        </textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="progress">Trạng Thái</label>
+                                                        <select
+                                                                id="progress"
+                                                                class="form-control select2"
+                                                                style="width: 100%"
+                                                                th:field="*{progress}"
+                                                        />
+                                                            <option value="PENDING">Chờ Duyệt</option>
+                                                            <option value="CANCELED">Đã Hủy</option>
+                                                            <option value="APPROVED">Đã Duyệt</option>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
+                                        <button style="margin-top: 10px;" type="submit" class="btn btn-primary pull-right">Lưu Dữ Liệu</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{resources/back/js/jquery.min.js}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{resources/back/js/bootstrap.min.js}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script th:src="@{resources/back/js/metisMenu.min.js}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script th:src="@{resources/back/js/startmin.js}"></script>
+
+</body>
+
+</html>
