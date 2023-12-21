@@ -84,9 +84,10 @@
                                         <td th:text="${item.title}"></td>
                                         <td th:text="${item.startDate} + ' -> ' + ${item.endDate}"></td>
                                         <td th:switch="${item.progress}" class="text-center">
-                                            <span class="badge" style="background-color: yellow;" th:case="PENDING">Chờ Duyệt</span>
+                                            <span class="badge" style="background-color: orange;" th:case="PENDING">Chờ Duyệt</span>
                                             <span class="badge" style="background-color: #dc3545;" th:case="CANCELED">Đã Hủy</span>
-                                            <span class="badge" style="background-color: #28a745" th:case="APPROVED">Đã Duyệt</span>
+                                            <span class="badge" style="background-color: blue;" th:case="APPROVED">Đã Duyệt</span>
+                                            <span class="badge" style="background-color: #28a745" th:case="COMPLETED">Hoàn Thành</span>
                                         </td>
                                         <td>
                                             <a class="btn btn-primary btn-sm"

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Table(name = "post")
 public class Post extends BaseEntity {
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private Account owner;
 

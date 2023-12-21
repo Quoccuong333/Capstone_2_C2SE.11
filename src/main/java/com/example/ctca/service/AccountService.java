@@ -21,4 +21,8 @@ public interface AccountService {
 
     Account register(AccountDTO accountDTO);
 
+    Account verifyAccount(long id);
+
+    List<Account> findByStatusIsTrue();
+
 }

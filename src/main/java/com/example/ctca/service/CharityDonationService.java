@@ -8,4 +8,8 @@ public interface CharityDonationService {
 
     List<CharityDonation> findAllByCharity(long charityId);
 
+    CharityDonation save(CharityDonation charityDonation);
+
+    CharityDonation findById(long id);
+
 }

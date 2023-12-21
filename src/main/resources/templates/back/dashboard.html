@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trang Quản Trị | CTCA</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/resources/back/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/resources/back/css/metisMenu.min.css}" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link th:href="@{/resources/back/css/timeline.css}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/resources/back/css/startmin.css}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/resources/back/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Morris Charts CSS -->
+    <link th:href="@{/resources/back/css/morris.css}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="~{fragments/back/navbar :: navbar}"/>
+
+    <div th:replace="~{fragments/back/sidebar :: sidebar}"/>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Tổng Quan</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-group fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${totalAccount}"></div>
+                                    <div>Tài Khoản</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/back/account">
+                            <div class="panel-footer">
+                                <span class="pull-left">Xem Thêm</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${totalPost}"></div>
+                                    <div>Bài Đăng</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/back/post">
+                            <div class="panel-footer">
+                                <span class="pull-left">Xem Thêm</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-star fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${totalCharity}"></div>
+                                    <div>Chương Trình Từ Thiện</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/back/charity">
+                            <div class="panel-footer">
+                                <span class="pull-left">Xem Thêm</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header border-transparent">
+                            <h3 class="card-title">Danh Sách Bài Đăng Chờ Duyệt</h3>
+                            <div class="card-tools">
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table m-0">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên Bài Đăng</th>
+                                        <th>Người Đăng</th>
+                                        <th>Ngày Yêu Cầu</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item, rowStat : ${postList}">
+                                        <td><a th:href="@{'/back/post/form/' + ${item.id}}" th:text="${rowStat.count}"></a></td>
+                                        <td><b th:text="${item.name}"></b></td>
+                                        <td><b th:text="${item.ownerDTO.fullName}"></b></td>
+                                        <td><span class="warning" style="background-color: yellow;" th:text="${item.createdOn}"></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer clearfix">
+                            <!--                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
+                            <a href="/back/post" class="btn btn-sm btn-secondary float-right">Xem Tất Cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header border-transparent">
+                            <h3 class="card-title">Danh sách Chương Trình Từ Thiện Chờ Duyệt</h3>
+                            <div class="card-tools">
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table m-0">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Chương Trình</th>
+                                        <th>Người Tổ Chức</th>
+                                        <th style="width: 120px">Ngày Yêu Cầu</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item, rowStat : ${charityList}">
+                                        <td><a th:href="@{'/back/charity/form/' + ${item.id}}" th:text="${rowStat.count}"></a></td>
+                                        <td><b th:text="${item.title}"></b></td>
+                                        <td><b th:text="${item.owner.fullName}"></b></td>
+                                        <td><span class="warning" style="background-color: yellow;" th:text="${item.createdOn}"></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer clearfix">
+                            <!--                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
+                            <a href="/back/charity" class="btn btn-sm btn-secondary float-right">Xem Tất Cả</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{/resources/back/js/jquery.min.js}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/resources/back/js/bootstrap.min.js}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script th:src="@{/resources/back/js/metisMenu.min.js}"></script>
+
+<!-- Morris Charts JavaScript -->
+<script th:src="@{/resources/back/js/raphael.min.js}"></script>
+<script th:src="@{/resources/back/js/morris.min.js}"></script>
+<script th:src="@{/resources/back/js/morris-data.js}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script th:src="@{/resources/back/js/startmin.js}"></script>
+
+</body>
+</html>

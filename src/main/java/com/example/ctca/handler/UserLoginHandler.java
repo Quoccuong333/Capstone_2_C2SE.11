@@ -16,18 +16,22 @@ public class UserLoginHandler {
     public AccountDTO getCurrentUser(Authentication authentication) {
         if (authentication == null) {
             return null;
-
         }
+
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         Account account = null;
+
         if (customUserDetails != null) {
             account = customUserDetails.getAccount();
         }
+
         AccountDTO accountDTO = null;
         if (account != null) {
             accountDTO = new AccountDTO();
             accountDTO.setFullName(account.getFullName());
             accountDTO.setEmail(account.getEmail());
+            accountDTO.setPhone(account.getPhone());
+            accountDTO.setRoleName(account.getRole().getName());
         }
         return accountDTO;
     }
@@ -35,6 +39,11 @@ public class UserLoginHandler {
     @ModelAttribute("requestURI")
     public String requestURI(final HttpServletRequest request) {
         return request.getRequestURI();
+    }
+
+    @ModelAttribute("requestURL")
+    public String requestURL(final HttpServletRequest request) {
+        return request.getRequestURL().toString();
     }
 
 }

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Báo Cáo Chương Trình Từ Thiện | CTCA</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/resources/back/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/resources/back/css/metisMenu.min.css}" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link th:href="@{/resources/back/css/timeline.css}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/resources/back/css/startmin.css}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/resources/back/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Morris Charts CSS -->
+    <link th:href="@{/resources/back/css/morris.css}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div id="wrapper">
+
+    <div th:replace="~{fragments/back/navbar :: navbar}"/>
+
+    <div th:replace="~{fragments/back/sidebar :: sidebar}"/>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Thống Kê Chiến Dịch Từ Thiện</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-heart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${reportDTO.totalCharity}"></div>
+                                    <div>Tổng Chiến Dịch Từ Thiện</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user-circle fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${reportDTO.totalVolunteer}"></div>
+                                    <div>Tình Nguyện Viên</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-lock fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${reportDTO.totalPending}"></div>
+                                    <div>Chờ Duyệt</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-check-square-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" th:text="${reportDTO.totalCompleted}"></div>
+                                    <div>Hoàn Thành</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <form id="quickForm2" method="get"
+                      th:action="@{/back/report/charity/search}"
+                      th:object="${reportDTO}">
+                    <div class="card-body" style="padding: 0;">
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="startDate">Từ Ngày</label>
+                                    <div class="input-group date" data-target-input="nearest">
+                                        <input type="date" id="startDate"
+                                               class="form-control datetimepicker-input"
+                                               data-target="#reservationdate" th:field="*{startDate}"
+                                               required/>
+                                    </div>
+                                    <p class="text-danger" th:if="${#fields.hasErrors('startDate')}"
+                                       th:errors="*{startDate}"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="endDate">Đến Ngày</label>
+                                    <div class="input-group date" data-target-input="nearest">
+                                        <input type="date" id="endDate"
+                                               class="form-control datetimepicker-input"
+                                               data-target="#reservationdate" th:field="*{endDate}"
+                                               required/>
+                                    </div>
+                                    <p class="text-danger" th:if="${#fields.hasErrors('endDate')}"
+                                       th:errors="*{endDate}"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="search"></label>
+                                    <div class="input-group date" data-target-input="nearest">
+                                        <button type="submit" class="btn btn-primary" id="search"
+                                                style="margin-left: 15px">Tìm Kiếm
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+<!--                <div class="col-md-6">-->
+                    <div class="card">
+                        <div class="card-header border-transparent">
+                            <h3 class="card-title">Danh Sách Chiến Dịch Từ Thiện</h3>
+                            <div class="card-tools">
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table m-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Mã Chương Trình</th>
+                                        <th>Chương Trình</th>
+                                        <th>Người Tồ Chức</th>
+                                        <th>Ngày Bắt Đầu</th>
+                                        <th>Ngày Kết Thúc</th>
+                                        <th style="width: 100px">Trạng thái</th>
+                                        <th>Tùy Chọn</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item : ${charityDTOList}">
+                                        <td th:text="${item.id}"></td>
+                                        <td th:text="${item.title}"></td>
+                                        <td th:text="${item.owner.fullName}"></td>
+                                        <td th:text="${item.startDate}"></td>
+                                        <td th:text="${item.endDate}"></td>
+                                        <td th:switch="${item.progress}" class="text-center">
+                                            <span class="badge" style="background-color: orange;" th:case="PENDING">Chờ Duyệt</span>
+                                            <span class="badge" style="background-color: #dc3545;" th:case="CANCELED">Đã Hủy</span>
+                                            <span class="badge" style="background-color: blue;" th:case="APPROVED">Đã Duyệt</span>
+                                            <span class="badge" style="background-color: #28a745" th:case="COMPLETED">Hoàn Thành</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm"
+                                               th:href="@{'/back/charity/form/' + ${item.id} }">
+                                                Chi Tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer clearfix">
+                            <!--                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>-->
+                            <a href="/back/charity" class="btn btn-sm btn-secondary float-right">Xem Tất Cả</a>
+                        </div>
+                    </div>
+<!--                </div>-->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{/resources/back/js/jquery.min.js}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/resources/back/js/bootstrap.min.js}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script th:src="@{/resources/back/js/metisMenu.min.js}"></script>
+
+<!-- Morris Charts JavaScript -->
+<script th:src="@{/resources/back/js/raphael.min.js}"></script>
+<script th:src="@{/resources/back/js/morris.min.js}"></script>
+<script th:src="@{/resources/back/js/morris-data.js}"></script>
+
+<!-- Custom Theme JavaScript -->
+<script th:src="@{/resources/back/js/startmin.js}"></script>
+
+</body>
+</html>

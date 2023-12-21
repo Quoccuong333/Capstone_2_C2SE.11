@@ -23,4 +23,29 @@ public class CharityVolunteerServiceImpl implements CharityVolunteerService {
         return charityVolunteerRepository.findByCharity(charity);
     }
 
+    @Override
+    public List<CharityVolunteer> findByStatusIsTrue() {
+        return charityVolunteerRepository.findByStatusIsTrue();
+    }
+
+    @Override
+    public CharityVolunteer findById(long id) {
+        return charityVolunteerRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public CharityVolunteer save(CharityVolunteer charityVolunteer) {
+        return charityVolunteerRepository.save(charityVolunteer);
+    }
+
+    @Override
+    public boolean checkRegisterVolunteer(long charityId, long accountId) {
+        int result = charityVolunteerRepository.countAccountByCharity(charityId, accountId);
+        if (result == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

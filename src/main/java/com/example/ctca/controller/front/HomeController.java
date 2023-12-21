@@ -9,7 +9,6 @@ import com.example.ctca.model.mapper.PostMapper;
 import com.example.ctca.service.CategoryService;
 import com.example.ctca.service.CharityService;
 import com.example.ctca.service.PostService;
-import com.example.ctca.utils.ConstantUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

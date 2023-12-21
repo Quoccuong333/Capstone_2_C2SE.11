@@ -9,20 +9,24 @@
                     class="fa fa-bars"></i></button>
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">
-                    <img th:src="@{/resources/front/img/logo-white.png}" class="logo logo-display" alt="">
-                    <img th:src="@{/resources/front/img/logo-white.png}" class="logo logo-scrolled" alt="">
+                    <img th:src="@{/resources/front/img/logo-app.png}" class="logo logo-display" alt="">
+                    <img th:src="@{/resources/front/img/logo-app.png}" class="logo logo-scrolled" alt="">
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                     <th:block th:if="${userLogin == null}">
                         <li class="left-br">
+                            <a href="/register" class="signin">Đăng Ký</a>
+                        </li>
+                        <li class="left-br">
                             <a href="/login" class="signin">Đăng Nhập</a>
                         </li>
                     </th:block>
                     <th:block th:if="${userLogin != null}">
+                        <li><a href="/logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Xuất</a></li>
                         <li class="left-br">
-                            <a href="/logout" class="signin">Đăng Xuất</a>
+                            <a href="/profile" class="signin"><span th:text="'Xin chào, ' + ${userLogin.fullName}"></span></a>
                         </li>
                     </th:block>
                 </ul>

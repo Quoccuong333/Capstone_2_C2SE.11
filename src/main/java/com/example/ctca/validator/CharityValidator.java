@@ -1,11 +1,8 @@
 package com.example.ctca.validator;
 
 import com.example.ctca.model.dto.CharityDTO;
-import com.example.ctca.model.dto.PostDTO;
 import com.example.ctca.model.entity.Charity;
-import com.example.ctca.model.entity.Post;
 import com.example.ctca.service.CharityService;
-import com.example.ctca.service.PostService;
 import com.example.ctca.utils.DateUtil;
 import com.example.ctca.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +14,6 @@ import java.util.Date;
 
 @Component
 public class CharityValidator implements Validator {
-
-    @Autowired
-    private CharityService charityService;
 
     @Override
     public boolean supports(Class<?> clazz) {

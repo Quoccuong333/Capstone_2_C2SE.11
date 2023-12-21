@@ -97,8 +97,7 @@ public class CharityController {
     @PostMapping(value = "/form")
     public String save(Model model, Authentication authentication, CharityDTO charityDTO, BindingResult bindingResult) {
         try {
-            CustomUserDetails customUserDetail = (CustomUserDetails) authentication.getPrincipal();
-            Account account = customUserDetail.getAccount();
+
             charityValidator.validate(charityDTO, bindingResult);
 
             if (bindingResult.hasErrors()) {
@@ -109,7 +108,12 @@ public class CharityController {
                 return "back/charity_form";
             }
             Charity charity = charityMapper.toEntity(charityDTO);
-            charity.setOwner(account);
+            CustomUserDetails customUserDetail = (CustomUserDetails) authentication.getPrincipal();
+            if (!ObjectUtils.isEmpty(customUserDetail) && ObjectUtils.isEmpty(charity.getOwner())) {
+                Account account = customUserDetail.getAccount();
+                charity.setOwner(account);
+            }
+
             if (charityDTO.getAvatarMul() != null && !ObjectUtils.isEmpty(charityDTO.getAvatarMul().getOriginalFilename())) {
                 FileDTO fileDTOBack = fileUploadService.uploadFile(charityDTO.getAvatarMul(), "IMAGE");
                 charity.setImage(fileDTOBack.getPath());

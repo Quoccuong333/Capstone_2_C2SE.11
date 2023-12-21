@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class CharityDTO {
+public class CharityDTO extends BaseDTO{
 
     private long id;
     private String title;
@@ -25,5 +25,6 @@ public class CharityDTO {
 
     // owner
     private AccountDTO owner;
+    private long ownerId;
 
 }

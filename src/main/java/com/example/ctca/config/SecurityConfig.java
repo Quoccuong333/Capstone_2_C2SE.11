@@ -25,7 +25,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private static final String[] PERMIT = {"/resources/**", "/home", "", "/", "/post/**", "/charity/**", "/login/**",
-            "/about", "/contact", "/register/**", "/forgot-password", "/logout", "/error/**"};
+            "/about", "/contact", "/register/**", "/forgot-password/**", "/logout", "/error/**"};
 
     private static final String[] ADMIN_AUTH = {"/back/**"};
 

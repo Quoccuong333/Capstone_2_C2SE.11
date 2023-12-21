@@ -11,4 +11,6 @@ public interface CharityVolunteerMapper {
 
     List<CharityVolunteerDTO> toListDTO(List<CharityVolunteer> charityVolunteerList);
 
+    CharityVolunteer toEntity(CharityVolunteerDTO charityVolunteerDTO);
+
 }

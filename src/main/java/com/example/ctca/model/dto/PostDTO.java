@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
-public class PostDTO {
+public class PostDTO extends BaseDTO{
 
     private long id;
     private String type;

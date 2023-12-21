@@ -45,27 +45,15 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">Bài Đăng</h1>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
             <div class="row">
-                <div class="row">
-                    <div
-                            class="alert alert-dismissible col-md-12"
-                            th:if="${messageDTO != null && messageDTO.key == 'save'}"
-                            th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}"
-                    >
-                        <button
-                                type="button"
-                                class="close"
-                                data-dismiss="alert"
-                                aria-hidden="true"
-                        >
-                            &times;
-                        </button>
-                        <h5><i class="icon fas fa-exclamation-triangle"></i> Thông Báo</h5>
-                        <span th:text="${messageDTO.message}"></span>
-                    </div>
+                <div
+                        class="alert alert-dismissible col-md-12"
+                        th:if="${messageDTO != null && messageDTO.key == 'save'}"
+                        th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Thông Báo</h5>
+                    <span th:text="${messageDTO.message}"></span>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -76,16 +64,16 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                    <form id="quickForm"
-                                          method="post"
-                                          enctype="multipart/form-data"
-                                          th:action="@{/back/post/form}"
-                                          th:object="${postDTO}">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="inputId">Mã Bài Đăng</label>
-                                                    <input
+                                        <form id="quickForm"
+                                              method="post"
+                                              enctype="multipart/form-data"
+                                              th:action="@{/back/post/form}"
+                                              th:object="${postDTO}">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputId">Mã Bài Đăng</label>
+                                                        <input
                                                             type="text"
                                                             name="id"
                                                             class="form-control"
@@ -94,164 +82,167 @@
                                                             placeholder=""
                                                             th:field="*{id}"
                                                             disabled
-                                                    />
-                                                    <p
+                                                        />
+                                                        <p
                                                             class="text-danger"
                                                             th:if="${#fields.hasErrors('id')}"
                                                             th:errors="*{id}"
-                                                    ></p>
-                                                </div>
+                                                        ></p>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="inputOwner">Người Đăng</label>
-                                                    <select class="form-control select2" id="inputOwner"
-                                                            style="width: 100%;"
-                                                            th:classappend="${#fields.hasErrors('ownerId')} ? 'is-invalid' : ''"
-                                                            th:field="*{ownerId}" disabled>
-                                                        <option th:each="item : ${accountList}"
-                                                                th:value="${item.id}"
-                                                                th:text="${item.fullName}"/>
-                                                    </select>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="inputOwner">Người Đăng</label>
+                                                        <select class="form-control select2" id="inputOwner"
+                                                                style="width: 100%;"
+                                                                th:classappend="${#fields.hasErrors('ownerId')} ? 'is-invalid' : ''"
+                                                                th:field="*{ownerId}" disabled>
+                                                            <option th:each="item : ${accountList}"
+                                                                    th:value="${item.id}"
+                                                                    th:text="${item.fullName}"/>
+                                                        </select>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="inputName">Tiêu Đề <code>(*)</code></label>
-                                                    <input
-                                                            type="text"
-                                                            name="name"
-                                                            th:field="*{name}"
-                                                            class="form-control"
-                                                            th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
-                                                            id="inputName"
-                                                            placeholder=""
-                                                    />
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('name')}"
-                                                            th:errors="*{name}"
-                                                    ></p>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="inputName">Tiêu Đề <code>(*)</code></label>
+                                                        <input
+                                                                type="text"
+                                                                name="name"
+                                                                th:field="*{name}"
+                                                                class="form-control"
+                                                                th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
+                                                                id="inputName"
+                                                                placeholder=""
+                                                        />
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('name')}"
+                                                                th:errors="*{name}"
+                                                        ></p>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="type">Loại</label>
-                                                    <select
-                                                            id="type"
-                                                            class="form-control select2"
-                                                            style="width: 100%"
-                                                            th:field="*{type}"
-                                                    >
-                                                        <option value="PURCHASE">Mua Bán</option>
-                                                        <option value="EXCHANGE">Trao Đổi</option>
-                                                        <option value="DONATE">Cho Tặng</option>
-                                                    </select>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="type">Loại</label>
+                                                        <select
+                                                                id="type"
+                                                                class="form-control select2"
+                                                                style="width: 100%"
+                                                                th:field="*{type}"
+                                                        >
+                                                            <option value="mua_ban">Mua Bán</option>
+                                                            <option value="trao_doi">Trao Đổi</option>
+                                                            <option value="cho_tang">Cho Tặng</option>
+                                                        </select>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="inputNote">Ghi Chú</label>
-                                                    <textarea class="form-control"
-                                                              id="inputNote"
-                                                              name="note"
-                                                              th:field="*{note}" rows="5">
+                                                    <div class="form-group">
+                                                        <label for="inputNote">Ghi Chú</label>
+                                                        <textarea class="form-control"
+                                                                  id="inputNote"
+                                                                  name="note"
+                                                                  th:field="*{note}" rows="5">
                                                     </textarea>
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('note')}"
-                                                            th:errors="*{note}"
-                                                    ></p>
-                                                </div>
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('note')}"
+                                                                th:errors="*{note}"
+                                                        ></p>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Hình Ảnh</label>
-                                                    <div class="input-group">
-                                                        <div class="custom-file">
-                                                            <input type="file" name="avatarMul" accept="image/*">
+                                                    <div class="form-group">
+                                                        <label>Hình Ảnh</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="avatarMul" accept="image/*">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6" th:if="${postDTO.image != null }">
+                                                            <img th:src="@{${postDTO.image}}" width="350px"/>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6" th:if="${postDTO.image != null }">
-                                                        <img th:src="@{${postDTO.image}}" width="350px"/>
+
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputCategory">Loại Danh Mục
+                                                            <code>(*)</code></label>
+                                                        <select
+                                                                class="form-control select2"
+                                                                id="inputCategory"
+                                                                style="width: 100%"
+                                                                th:classappend="${#fields.hasErrors('categoryId')} ? 'is-invalid' : ''"
+                                                                th:field="*{categoryId}"
+                                                        >
+                                                            <option th:value="0">Chọn Loại Danh Mục...</option>
+                                                            <option
+                                                                    th:each="item : ${categoryList}"
+                                                                    th:value="${item.id}"
+                                                                    th:text="${item.name}"
+                                                            ></option>
+                                                        </select>
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('categoryId')}"
+                                                                th:errors="*{categoryId}"
+                                                        ></p>
                                                     </div>
-                                                </div>
 
-                                            </div>
+                                                    <div class="form-group">
+                                                        <label for="inputPrice">Giá Tiền (VNĐ)<code>(*)</code></label>
+                                                        <input
+                                                                type="text"
+                                                                name="price"
+                                                                class="form-control"
+                                                                th:classappend="${#fields.hasErrors('price')} ? 'is-invalid' : ''"
+                                                                id="inputPrice"
+                                                                placeholder="..."
+                                                                th:field="*{price}"
+                                                        />
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('price')}"
+                                                                th:errors="*{price}"
+                                                        ></p>
+                                                    </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="inputCategory">Loại Danh Mục <code>(*)</code></label>
-                                                    <select
-                                                            class="form-control select2"
-                                                            id="inputCategory"
-                                                            style="width: 100%"
-                                                            th:classappend="${#fields.hasErrors('categoryId')} ? 'is-invalid' : ''"
-                                                            th:field="*{categoryId}"
-                                                    >
-                                                        <option th:value="0">Chọn Loại Danh Mục...</option>
-                                                        <option
-                                                                th:each="item : ${categoryList}"
-                                                                th:value="${item.id}"
-                                                                th:text="${item.name}"
-                                                        ></option>
-                                                    </select>
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('categoryId')}"
-                                                            th:errors="*{categoryId}"
-                                                    ></p>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="progress">Trạng Thái</label>
+                                                        <select
+                                                                id="progress"
+                                                                class="form-control select2"
+                                                                style="width: 100%"
+                                                                th:field="*{progress}"
+                                                        >
+                                                            <option value="PENDING">Chờ Duyệt</option>
+                                                            <option value="CANCELED">Đã Hủy</option>
+                                                            <option value="APPROVED">Đã Duyệt</option>
+                                                            <option value="COMPLETED">Hoàn Thành</option>
+                                                        </select>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="inputPrice">Giá Tiền (VNĐ)<code>(*)</code></label>
-                                                    <input
-                                                            type="text"
-                                                            name="price"
-                                                            class="form-control"
-                                                            th:classappend="${#fields.hasErrors('price')} ? 'is-invalid' : ''"
-                                                            id="inputPrice"
-                                                            placeholder="..."
-                                                            th:field="*{price}"
-                                                    />
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('price')}"
-                                                            th:errors="*{price}"
-                                                    ></p>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="progress">Trạng Thái</label>
-                                                    <select
-                                                            id="progress"
-                                                            class="form-control select2"
-                                                            style="width: 100%"
-                                                            th:field="*{progress}"
-                                                    >
-                                                        <option value="PENDING">Chờ Duyệt</option>
-                                                        <option value="CANCELED">Tạm Ngưng</option>
-                                                        <option value="APPROVED">Đã Duyệt</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="inputDescription">Mô Tả<code>(*)</code></label>
-                                                    <textarea class="form-control"
-                                                              id="inputDescription"
-                                                              name="description" style="height: 188px;"
-                                                              th:field="*{description}" rows="5">
+                                                    <div class="form-group">
+                                                        <label for="inputDescription">Mô Tả<code>(*)</code></label>
+                                                        <textarea class="form-control"
+                                                                  id="inputDescription"
+                                                                  name="description" style="height: 188px;"
+                                                                  th:field="*{description}" rows="5">
                                                     </textarea>
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('description')}"
-                                                            th:errors="*{description}"
-                                                    ></p>
-                                                </div>
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('description')}"
+                                                                th:errors="*{description}"
+                                                        ></p>
+                                                    </div>
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row card-footer" style="margin-left: 0px; margin-right: 0px">
-                                            <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
-                                            <button type="submit" class="btn btn-primary pull-right">Lưu Dữ Liệu</button>
-                                        </div>
-                                    </form>
-                                  </div>
+                                            <div class="row card-footer" style="margin-left: 0px; margin-right: 0px">
+                                                <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
+                                                <button type="submit" class="btn btn-primary pull-right">Lưu Dữ Liệu
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                                 <!-- /.row (nested) -->
 

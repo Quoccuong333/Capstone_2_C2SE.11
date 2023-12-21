@@ -8,6 +8,7 @@ import com.example.ctca.model.mapper.PostMapper;
 import com.example.ctca.service.AccountService;
 import com.example.ctca.service.CategoryService;
 import com.example.ctca.service.PostService;
+import com.example.ctca.utils.DateUtil;
 import com.example.ctca.utils.FormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,8 @@ public class PostMapperImpl implements PostMapper {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    DateUtil dateUtil;
 
     @Override
     public PostDTO toDTO(Post post) {
@@ -51,6 +54,12 @@ public class PostMapperImpl implements PostMapper {
         postDTO.setNote(post.getNote());
         postDTO.setProgress(post.getProgress());
         postDTO.setStatus(post.isStatus());
+
+        // base
+        postDTO.setId(post.getId());
+        postDTO.setVersion(post.getVersion());
+        postDTO.setCreatedOn(dateUtil.convertDateToString(post.getCreatedOn(), "yyyy-MM-dd"));
+        postDTO.setCreatedOn(dateUtil.convertDateToString(post.getUpdatedOn(), "yyyy-MM-dd"));
 
         if (post.getOwner() != null) {
             postDTO.setOwnerId(post.getOwner().getId());
@@ -102,10 +111,14 @@ public class PostMapperImpl implements PostMapper {
             post.setImage(postDTO.getImage());
         }
         post.setNote(postDTO.getNote());
-        post.setProgress(postDTO.getProgress());
         post.setStatus(postDTO.isStatus());
-        post.setOwner(accountService.findById(postDTO.getOwnerId()));
-        post.setCategory(categoryService.findById(postDTO.getCategoryId()));
+        if (postDTO.getOwnerId() != 0) {
+            post.setOwner(accountService.findById(postDTO.getOwnerId()));
+        }
+        if (postDTO.getCategoryId() != 0) {
+            post.setCategory(categoryService.findById(postDTO.getCategoryId()));
+        }
+        post.setProgress(postDTO.getProgress());
 
         return post;
     }

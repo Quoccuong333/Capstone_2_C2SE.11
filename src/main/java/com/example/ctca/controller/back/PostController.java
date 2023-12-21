@@ -15,7 +15,6 @@ import com.example.ctca.service.CategoryService;
 import com.example.ctca.service.FileUploadService;
 import com.example.ctca.service.PostService;
 import com.example.ctca.utils.FormatUtils;
-import com.example.ctca.utils.ValidatorUtil;
 import com.example.ctca.validator.PostValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -145,7 +144,7 @@ public class PostController {
             }
 
             CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-            if (!ObjectUtils.isEmpty(customUserDetails)) {
+            if (!ObjectUtils.isEmpty(customUserDetails) && ObjectUtils.isEmpty(post.getOwner())) {
                 Account account = customUserDetails.getAccount();
                 post.setOwner(accountService.findById(account.getId()));
             }

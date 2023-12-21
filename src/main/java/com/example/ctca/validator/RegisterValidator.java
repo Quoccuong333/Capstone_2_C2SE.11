@@ -87,12 +87,6 @@ public class RegisterValidator implements Validator {
                     }
                 }
             }
-
-            // verify type
-            if (ValidatorUtil.isEmpty(accountDTO.getRoleName())) {
-                errors.rejectValue("roleName", "Vui lòng chọn Loại Tài Khoản!",
-                        "Vui lòng chọn Loại Tài Khoản!");
-            }
         } catch(Exception e) {
             errors.rejectValue("msg", "Có lỗi xảy ra, vui lòng thử lại!",
                     "Có lỗi xảy ra, vui lòng thử lại!");

@@ -8,19 +8,36 @@
     <link rel="stylesheet" th:href="@{/resources/front/plugins/css/plugins.css}">
     <link th:href="@{/resources/front/css/style.css}" rel="stylesheet">
     <link type="text/css" rel="stylesheet" id="jssDefault" th:href="@{/resources/front/css/colors/green-style.css}">
+    <style>
+        .brows-job-position h3 {
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+        }
+        .grid-view-caption {
+            margin: 1em 0 0;
+        }
+        .paid-candidate-box-detail h4 {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/front/header :: header}"></div>
 <section class="slide-banner scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
     <div class="slideshow-container">
         <div class="slideshow-item">
-            <div class="bg" th:attr="data-bg=@{/resources/front/img/banner-3.jpg}"></div>
+            <div class="bg" th:attr="data-bg=@{/resources/front/img/banner_2.jpg}"></div>
         </div>
         <div class="slideshow-item">
-            <div class="bg" th:attr="data-bg=@{/resources/front/img/banner-6.jpg}"></div>
+            <div class="bg" th:attr="data-bg=@{/resources/front/img/banner_1.jpg}"></div>
         </div>
         <div class="slideshow-item">
-            <div class="bg" th:attr="data-bg=@{/resources/front/img/banner-5.jpg}"></div>
+            <div class="bg" th:attr="data-bg=@{/resources/front/img/banner_3.jpg}"></div>
         </div>
     </div>
     <div class="overlay"></div>
@@ -28,20 +45,22 @@
         <div class="container">
             <div class="intro-item fl-wrap">
                 <div class="caption text-center cl-white">
-                    <h2>Khám phá hơn 10000+ giao dịch</h2>
+                    <h2>Chạm Để Kết Nối</h2>
                     <p>Hãy yêu thương và chia sẻ với mọi người, bạn sẽ nhận về niềm vui và hạnh phúc.</p>
                 </div>
                 <form class="form-horizontal" action="/post" method="get">
                     <div class="col-md-5 no-padd">
                         <div class="input-group">
-                            <input type="text" class="form-control br-1" id="joblist" placeholder="Bạn muốn tìm gì...">
+                            <input type="text" class="form-control br-1" id="joblist" placeholder="Bạn muốn tìm gì..."
+                                   required>
                         </div>
                     </div>
                     <div class="col-md-4 no-padd">
                         <div class="input-group">
                             <select id="choose-city" class="form-control" name="categoryId">
-                                <option>Chọn Danh Mục</option>
-                                <option th:text="${item.name}" th:value="${item.id}" th:each="item : ${categoryList}"></option>
+                                <option th:value="-1">Chọn Danh Mục</option>
+                                <option th:text="${item.name}" th:value="${item.id}"
+                                        th:each="item : ${categoryList}"></option>
                             </select>
                         </div>
                     </div>
@@ -66,15 +85,19 @@
             </div>
         </div>
         <div class="row extra-mrg">
-            <div class="col-md-3 col-sm-6" th:each="item : ${postList}">
+            <div class="col-md-4 col-sm-6" th:each="item : ${postList}">
                 <div class="grid-view brows-job-list">
-                    <div class="brows-job-company-img">
-                        <img th:src="@{${item.image}}" alt=""/>
+                    <div class="brows-job-company-img" style="width: 200px; margin: 10px auto; height: 200px; max-width: 200px; margin: 0px auto;">
+                        <img th:src="@{${item.image}}" alt="" style="width: 200px; margin: 10px auto; height: 200px; max-width: 200px; border-radius: 10%;  margin: 0px auto;"/>
                     </div>
                     <div class="brows-job-position">
                         <h3><a th:href="@{'/post/detail/' + ${item.id}}" th:text="${item.name}"></a></h3>
                     </div>
-                    <div class="brows-job-type"><span class="freelanc" th:class="${item.colorType}" th:text="${item.type}"></span></div>
+                    <div class="brows-job-type">
+                        <span th:class="${item.colorType}" th:if="${item.type == 'cho_tang'}">Cho Tặng</span>
+                        <span th:class="${item.colorType}" th:if="${item.type == 'trao_doi'}" >Trao Đổi</span>
+                        <span th:class="${item.colorType}" th:if="${item.type == 'mua_ban'}" >Mua Bán</span>
+                    </div>
                     <ul class="grid-view-caption">
                         <li>
                             <div class="brows-job-location">
@@ -88,7 +111,11 @@
                     </ul>
                 </div>
             </div>
-
+            <div class="col-md-12 col-sm-12">
+                <div class="text-center">
+                    <a href="/post" class="btn btn-primary">Xem Thêm</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -100,7 +127,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="main-heading">
                     <p>Chương trình quyên góp</p>
-                    <h2>Các chương trình quyên góp của Hoa Chia Sẻ trên <span>CTCA</span></h2>
+                    <h2>Các chương trình <span>Quyên Góp</span></h2>
                 </div>
             </div>
         </div>
@@ -110,7 +137,7 @@
                     <div class="paid-candidate-box" style="padding: 20px">
                         <div class="paid-candidate-inner--box">
                             <div class="paid-candidate-box-thumb">
-                                <img th:src="@{${item.image}}" alt="" />
+                                <img th:src="@{${item.image}}" alt=""/>
                             </div>
                             <div class="paid-candidate-box-detail">
                                 <a th:href="@{'/charity/detail/' + ${item.id}}"><h4 th:text="${item.title}"></h4></a>
@@ -134,96 +161,6 @@
     </div>
 </section>
 
-<section class="wp-process home-three">
-    <div class="container">
-        <div class="row">
-            <div class="main-heading">
-                <p>“Hoa Chia Sẻ”</p>
-                <h2>Sứ mệnh truyền cảm hứng với <span>5 giá trị</span> cốt lõi</h2>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="work-process">
-                <div class="work-process-icon">
-                    <img th:src="@{/resources/front/img/icon-tam.webp}" class="img-responsive" alt="">
-                </div>
-                <div class="work-process-caption">
-                    <h4>TÂM</h4>
-                    <p>Nhân văn, thiện chí, thân ái</p>
-                </div>
-            </div>
-            <div class="work-process">
-                <div class="work-process-icon">
-                    <img th:src="@{/resources/front/img/icon-tin.webp}" class="img-responsive" alt="">
-                </div>
-                <div class="work-process-caption">
-                    <h4>TÍN</h4>
-                    <p>Thực thi đúng hoặc cao hơn các cam kết</p>
-                </div>
-            </div>
-            <div class="work-process">
-                <div class="work-process-icon">
-                    <img th:src="@{/resources/front/img/icon-tri.webp}" class="img-responsive" alt="">
-                </div>
-                <div class="work-process-caption">
-                    <h4>TRÍ</h4>
-                    <p>Sáng tạo, dám nghĩ dám làm; tìm tòi, chủ động cải tiến</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 hidden-sm">
-            <img th:src="@{/resources/front/img/icon-hoa-chia-se.webp}" class="img-responsive" alt="">
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="work-process">
-                <div class="work-process-icon">
-                    <img th:src="@{/resources/front/img/icon-chinh-truc.webp}" class="img-responsive" alt="">
-                </div>
-                <div class="work-process-caption">
-                    <h4>CHÍNH TRỰC</h4>
-                    <p>Liêm chính, trung thực trong ứng xử và giao dịch</p>
-                </div>
-            </div>
-            <div class="work-process">
-                <div class="work-process-icon">
-                    <img th:src="@{/resources/front/img/icon-tran-trong.webp}" class="img-responsive" alt="">
-                </div>
-                <div class="work-process-caption">
-                    <h4>TRÂN TRỌNG</h4>
-                    <p>Quý trọng các đóng góp dù là nhỏ nhất</p>
-                </div>
-            </div>
-            <div class="work-process">
-                <div class="work-process-icon">
-                    <img th:src="@{/resources/front/img/icon-quyen-gop.svg}" class="img-responsive" alt="">
-                </div>
-                <div class="work-process-caption">
-                    <h4>Quyên góp dễ dàng</h4>
-                    <p>Chỉ với vài chạm, bạn đã góp phần giúp đỡ 1 hoàn cảnh khó khăn có cuộc sống tốt đẹp hơn</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="clearfix"></div>
-<section class="download-app" style="background-image:url(assets/img/banner-10.jpg);">
-    <div class="container">
-        <div class="col-md-5 col-sm-5 hidden-xs">
-            <img th:src="@{/resources/front/img/iphone.png}" class="img-responsive" alt="">
-        </div>
-        <div class="col-md-7 col-sm-7">
-            <div class="app-content">
-                <h2>Tải Ứng Dụng CTCA</h2>
-                <h4>Connecting the Community and Giving Love</h4>
-
-                <p>Bạn có thể tải ứng dụng CTCA - Connecting the Community and Giving Love tại đây để dễ dàng sử dụng.</p>
-                <a href="#" class="btn call-btn"><i class="fa fa-apple"></i>Tải Ngay</a>
-                <a href="#" class="btn call-btn"><i class="fa fa-android"></i>Tải Ngay</a>
-            </div>
-        </div>
-    </div>
-</section>
 <div class="clearfix"></div>
 
 <div th:replace="~{fragments/front/footer :: footer}"></div>

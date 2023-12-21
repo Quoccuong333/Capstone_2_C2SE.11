@@ -10,11 +10,11 @@ import lombok.Setter;
 @Table(name = "charity_volunteer")
 public class CharityVolunteer extends BaseEntity {
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "charity_id")
     private Charity charity;
 

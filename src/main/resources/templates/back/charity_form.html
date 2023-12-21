@@ -46,78 +46,65 @@
                     <h1 class="page-header">Chương Trình Từ Thiện</h1>
                 </div>
             </div>
-
             <div class="row">
                 <div
                         class="alert alert-dismissible col-md-12"
                         th:if="${messageDTO != null && messageDTO.key == 'save'}"
-                        th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}"
-                >
-                    <button
-                            type="button"
-                            class="close"
-                            data-dismiss="alert"
-                            aria-hidden="true"
-                    >
-                        &times;
-                    </button>
+                        th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h5><i class="icon fa fa-exclamation-triangle"></i> Thông Báo</h5>
                     <span th:text="${messageDTO.message}"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Thêm Chương Trình Từ Thiện
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form method="post"
-                                          enctype="multipart/form-data"
-                                          th:action="@{/back/charity/form}"
-                                          th:object="${charityDTO}">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="inputId">Mã Chương Trình</label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="inputId"
-                                                           name="id"
-                                                           th:field="*{id}"
-                                                           disabled>
-                                                </div>
-                                                <div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'has-error' : ''">
-                                                    <label for="inputTitle"> Tiêu Đề<code>(*)</code></label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="inputTitle"
-                                                           name="title"
-                                                           th:field="*{title}" >
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('title')}"
-                                                            th:errors="*{title}"
-                                                    ></p>
-                                                </div>
-                                                <div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'has-error' : ''">
-                                                    <label for="inputDescription">Mô Tả<code>(*)</code></label>
-                                                    <textarea class="form-control"
-                                                              id="inputDescription"
-                                                              name="description"
-                                                              th:field="*{description}" rows="5">
-                                                    </textarea>
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('description')}"
-                                                            th:errors="*{description}"
-                                                    ></p>
-                                                </div>
 
-                                            </div>
-                                            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Thông Tin Chương Trình
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form id="quickForm"
+                                              method="post"
+                                              enctype="multipart/form-data"
+                                              th:action="@{/back/charity/form}"
+                                              th:object="${charityDTO}">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputId">Mã Chương Trình</label>
+                                                        <input type="text" class="form-control" id="inputId" name="id" th:field="*{id}" disabled>
+                                                    </div>
+                                                    <div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'has-error' : ''">
+                                                        <label for="inputTitle"> Tiêu Đề<code>(*)</code></label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="inputTitle"
+                                                               name="title"
+                                                               th:field="*{title}" >
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('title')}"
+                                                                th:errors="*{title}"
+                                                        ></p>
+                                                    </div>
+                                                    <div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'has-error' : ''">
+                                                        <label for="inputDescription">Mô Tả<code>(*)</code></label>
+                                                        <textarea class="form-control"
+                                                                  id="inputDescription"
+                                                                  name="description"
+                                                                  th:field="*{description}" rows="5">
+                                                    </textarea>
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('description')}"
+                                                                th:errors="*{description}"
+                                                        ></p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="col-md-6">
                                                         <div class="form-group" th:classappend="${#fields.hasErrors('startDate')} ? 'has-error' : ''">
                                                             <label for="inputStartDate"> Từ Ngày</label>
@@ -165,17 +152,19 @@
                                                                 id="progress"
                                                                 class="form-control select2"
                                                                 style="width: 100%"
-                                                                th:field="*{progress}"
-                                                        />
+                                                                th:field="*{progress}">
                                                             <option value="PENDING">Chờ Duyệt</option>
                                                             <option value="CANCELED">Đã Hủy</option>
                                                             <option value="APPROVED">Đã Duyệt</option>
+                                                            <option value="COMPLETED">Hoàn Thành</option>
+                                                        </select>
                                                     </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
-                                        <button style="margin-top: 10px;" type="submit" class="btn btn-primary pull-right">Lưu Dữ Liệu</button>
-                                    </form>
+                                            <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
+                                            <button style="margin-top: 10px;" type="submit" class="btn btn-primary pull-right">Lưu Dữ Liệu</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -191,16 +180,16 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script th:src="@{resources/back/js/jquery.min.js}"></script>
+<script th:src="@{/resources/back/js/jquery.min.js}"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script th:src="@{resources/back/js/bootstrap.min.js}"></script>
+<script th:src="@{/resources/back/js/bootstrap.min.js}"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script th:src="@{resources/back/js/metisMenu.min.js}"></script>
+<script th:src="@{/resources/back/js/metisMenu.min.js}"></script>
 
 <!-- Custom Theme JavaScript -->
-<script th:src="@{resources/back/js/startmin.js}"></script>
+<script th:src="@{/resources/back/js/startmin.js}"></script>
 
 </body>
 

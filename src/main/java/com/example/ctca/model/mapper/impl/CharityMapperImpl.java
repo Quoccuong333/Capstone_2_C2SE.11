@@ -2,6 +2,7 @@ package com.example.ctca.model.mapper.impl;
 
 import com.example.ctca.model.dto.CharityDTO;
 import com.example.ctca.model.entity.Charity;
+import com.example.ctca.model.mapper.AccountMapper;
 import com.example.ctca.model.mapper.CharityMapper;
 import com.example.ctca.service.CharityService;
 import com.example.ctca.utils.DateUtil;
@@ -16,6 +17,12 @@ public class CharityMapperImpl implements CharityMapper {
 
     @Autowired
     CharityService charityService;
+
+    @Autowired
+    DateUtil dateUtil;
+
+    @Autowired
+    AccountMapper accountMapper;
 
 
     @Override
@@ -33,6 +40,17 @@ public class CharityMapperImpl implements CharityMapper {
         charityDTO.setEndDate(DateUtil.convertDateToString(charity.getEndDate(),"yyyy-MM-dd"));
         charityDTO.setProgress(charity.getProgress());
         charityDTO.setStatus(charity.isStatus());
+
+        if (charity.getOwner() != null) {
+            charityDTO.setOwnerId(charity.getOwner().getId());
+            charityDTO.setOwner(accountMapper.toDTO(charity.getOwner()));
+        }
+
+        // base
+        charityDTO.setId(charity.getId());
+        charityDTO.setVersion(charity.getVersion());
+        charityDTO.setCreatedOn(dateUtil.convertDateToString(charity.getCreatedOn(), "yyyy-MM-dd"));
+        charityDTO.setCreatedOn(dateUtil.convertDateToString(charity.getUpdatedOn(), "yyyy-MM-dd"));
 
         return charityDTO;
     }

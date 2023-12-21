@@ -1,5 +1,7 @@
 package com.example.ctca.service.impl;
 
+import com.example.ctca.model.dto.ReportDTO;
+import com.example.ctca.model.entity.Account;
 import com.example.ctca.model.entity.Charity;
 import com.example.ctca.repository.CharityRepository;
 import com.example.ctca.service.CharityService;
@@ -22,6 +24,14 @@ public class CharityServiceImpl implements CharityService {
     }
 
     @Override
+    public List<Charity> findByOwner(long accountId) {
+        Account account = new Account();
+        account.setId(accountId);
+
+        return charityRepository.findByOwner(account);
+    }
+
+    @Override
     public List<Charity> findByRandom() {
         return charityRepository.findByRandom();
     }
@@ -39,5 +49,27 @@ public class CharityServiceImpl implements CharityService {
     @Override
     public Charity save(Charity charity) {
         return charityRepository.save(charity);
+    }
+
+    @Override
+    public List<Charity> findByProgress(String progress) {
+        return charityRepository.findByProgress(progress);
+    }
+
+    @Override
+    public List<Charity> findByStatusIsTrue() {
+        return charityRepository.findByStatusIsTrue();
+    }
+
+    @Override
+    public List<Charity> findReport(ReportDTO reportDTO) {
+        String startDate = reportDTO.getStartDate() + " 00:00:00";
+        String endDate = reportDTO.getEndDate() +  " 23:59:59";
+        return charityRepository.findReport(startDate,endDate);
+    }
+
+    @Override
+    public Page<Charity> findByStatusIsTrueAndTitle(Pageable pageable, String key) {
+        return charityRepository.findByStatusIsTrueAndTitleContains(pageable, key);
     }
 }

@@ -14,8 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,28 +45,37 @@ public class PostListController {
     @GetMapping(value = {""})
     public String showPostAll(Model model, @RequestParam(value = "page", defaultValue = DEFAULT_PAGE,
                                        required = false) int pageNumber,
-                              @RequestParam(value = "categoryId", defaultValue = "0", required = false) String categoryId) {
+                              @RequestParam(value = "categoryId", defaultValue = "0", required = false) String categoryId, @RequestParam(required = false) String title) {
         long category = DEFAULT_CATEGORY;
+
+        if (categoryId != null && categoryId.equalsIgnoreCase("-1")) {
+            return "error";
+        }
 
         if (categoryId != null || !categoryId.equalsIgnoreCase("")) {
             category = Long.parseLong(categoryId);
         }
 
-        return listByPage(model, pageNumber, category);
+        return listByPage(model, pageNumber, category, title);
     }
 
-    private String listByPage(Model model, int pageNumber, long categoryId) {
+    private String listByPage(Model model, int pageNumber, long categoryId, String title) {
         List<Category> categoryList = categoryService.findAll();
 
         // pagination
         Pageable pageable = PageRequest.of(pageNumber - 1, ConstantUtil.PAGE_SIZE, Sort.by("name").ascending());
         Page<Post> postList;
-
-        if (categoryId == DEFAULT_CATEGORY) {
+        if (categoryId == DEFAULT_CATEGORY && StringUtils.isEmpty(title)) {
             postList = postService.findByCategoryAndStatusTrue(null, pageable);
-        } else {
+        } else if (categoryId != DEFAULT_CATEGORY && StringUtils.isEmpty(title)) {
             Category category = categoryService.findById(categoryId);
             postList = postService.findByCategoryAndStatusTrue(category, pageable);
+
+        } else if (categoryId == DEFAULT_CATEGORY && !StringUtils.isEmpty(title)) {
+            postList = postService.findByCategoryAndStatusTrueAndNameContains(null, pageable, title);
+        } else {
+            Category category = categoryService.findById(categoryId);
+            postList = postService.findByCategoryAndStatusTrueAndNameContains(category, pageable, title);
         }
 
         List<Post> postListByPage = new ArrayList<>(postList.getContent());

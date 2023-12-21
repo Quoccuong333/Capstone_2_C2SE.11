@@ -19,4 +19,9 @@ public class AccountDTO {
 
     private String confirmPassword;
 
+    private String rePassword;
+    private String oldPassword;
+    private String newPassword;
+    private String verifyNewPassword;
+
 }

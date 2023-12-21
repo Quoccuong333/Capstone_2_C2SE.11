@@ -36,7 +36,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findByEmail(String email) {
-        return accountRepository.findByEmail(email).orElse(null);
+        return accountRepository.findByEmailAndStatusIsTrue(email).orElse(null);
     }
 
     @Override
@@ -85,13 +85,8 @@ public class AccountServiceImpl implements AccountService {
         Role role;
 
         // role
-        if(accountDTO.getRoleName() == null || accountDTO.getRoleName().equalsIgnoreCase("USER")) {
-            role = roleService.findByName(accountDTO.getRoleName());
-            account.setRole(role);
-        } else {
-            role = roleService.findByName("CHARITY");
-            account.setRole(role);
-        }
+        role = roleService.findByName("USER");
+        account.setRole(role);
 
         // account
         account.setId(accountDTO.getId());
@@ -100,8 +95,21 @@ public class AccountServiceImpl implements AccountService {
         account.setPassword(encodedPassword);
         account.setPhone(accountDTO.getPhone());
         account.setEmail(accountDTO.getEmail().trim());
-        account.setStatus(true);
+        account.setStatus(false);
 
         return accountRepository.save(account);
+    }
+
+    @Override
+    public Account verifyAccount(long id) {
+        Account account = accountRepository.findById(id).orElse(null);
+        account.setStatus(true);
+        accountRepository.save(account);
+        return account;
+    }
+
+    @Override
+    public List<Account> findByStatusIsTrue() {
+        return accountRepository.findByStatusIsTrue();
     }
 }

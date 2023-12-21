@@ -23,4 +23,14 @@ public class CharityDonationServiceImpl implements CharityDonationService {
         return charityDonationRepository.findByCharity(charity);
     }
 
+    @Override
+    public CharityDonation save(CharityDonation charityDonation) {
+        return charityDonationRepository.save(charityDonation);
+    }
+
+    @Override
+    public CharityDonation findById(long id) {
+        return charityDonationRepository.findById(id).orElse(null);
+    }
+
 }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error 404 | CTCA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS==================================================-->
+    <link rel="stylesheet" th:href="@{/resources/front/plugins/css/plugins.css}">
+    <link th:href="@{/resources/front/css/style.css}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" id="jssDefault" th:href="@{/resources/front/css/colors/green-style.css}">
+    <style>
+        .brows-job-position h3 {
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+        }
+        .grid-view-caption {
+            margin: 1em 0 0;
+        }
+        .paid-candidate-box-detail h4 {
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed navbar-light white bootsnav on no-full">
+    <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i
+                class="fa fa-bars"></i></button>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <img th:src="@{/resources/front/img/logo-app.png}" class="logo logo-display" alt="">
+                <img th:src="@{/resources/front/img/logo-app.png}" class="logo logo-scrolled" alt="">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                <th:block th:if="${userLogin == null}">
+                    <li class="left-br">
+                        <a href="/register" class="signin">Đăng Ký</a>
+                    </li>
+                    <li class="left-br">
+                        <a href="/login" class="signin">Đăng Nhập</a>
+                    </li>
+                </th:block>
+                <th:block th:if="${userLogin != null}">
+                    <li><a href="/logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Xuất</a></li>
+                    <li class="left-br">
+                        <a href="/profile" class="signin"><span th:text="'Xin chào, ' + ${userLogin.fullName}"></span></a>
+                    </li>
+                </th:block>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i>Trang Chủ</a></li>
+                <li><a href="/post"><i class="fa fa-pencil" aria-hidden="true"></i>Bài Đăng</a></li>
+                <li><a href="/charity"><i class="fa fa-tags" aria-hidden="true"></i>Từ Thiện</a></li>
+                <th:block th:if="${userLogin == null}">
+                    <li><a href="/register"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng Ký</a></li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="clearfix"></div>
+<!-- Tab Section Start -->
+<section class="simple-bg-screen big-wrap">
+    <div class="container">
+        <div class="error-page">
+            <h2>4<span>0</span>4</h2>
+            <p>Oops...Không Tìm Thấy Trang!</p>
+            <a class="btn btn-success small-btn">Quay Lại Trang Chủ</a>
+        </div>
+    </div>
+</section>
+<!-- Tab section End -->
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/viewportchecker.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootsnav.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/select2.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/wysihtml5-0.3.0.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap-wysihtml5.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/datedropper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/dropzone.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/loader.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/owl.carousel.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/slick.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/gmap3.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.easy-autocomplete.min.js}"></script>
+<script th:src="@{/resources/front/js/custom.js}"></script>
+<script th:src="@{/resources/front/js/jQuery.style.switcher.js}"></script>
+</body>
+</html>

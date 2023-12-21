@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Quyên Góp Từ Thiện - CTCA</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS==================================================-->
+    <link rel="stylesheet" th:href="@{/resources/front/plugins/css/plugins.css}">
+    <link th:href="@{/resources/front/css/style.css}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" id="jssDefault" th:href="@{/resources/front/css/colors/green-style.css}">
+
+    <style>
+        .grid-view-caption li {
+            width: 100%;
+        }
+        .grid-view .brows-job-company-img {
+            width: 285px;
+            margin-top: 25px;
+            height: 240px;
+            background: #fff;
+            line-height: 80px;
+            border: none;
+            border-radius: 0;
+        }
+        .grid-view .brows-job-company-img img {
+            margin: 0 auto;
+            vertical-align: middle;
+            display: inline-block;
+            max-width: 100%;
+            line-height: 50px;
+            height: 100%;
+        }
+        .btn-primary.small-btn:hover{
+            padding : 20px
+        }
+
+        .disabled {
+            pointer-events: none;
+            opacity: .65;
+        }
+        .has-error .control-label {
+            color: #dc3545;
+        }
+        .has-error .form-control {
+            border-color: #dc3545;
+            padding-right: calc(1.5em + 0.75rem);
+        }
+        .invalid-feedback {
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: .875em;
+            color: #dc3545;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- Start Navigation -->
+    <div th:replace="~{fragments/front/header :: header}"></div>
+
+    <!-- End Navigation -->
+    <div class="clearfix"></div>
+
+    <!-- Header Title Start -->
+    <section class="inner-header-title blank">
+        <div class="container">
+            <h1>Thông Tin Quyên Góp</h1>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+    <!-- Header Title End -->
+
+    <!-- General Detail Start -->
+    <div class="full-detail section">
+        <div class="container white-shadow">
+            <div class="row">
+                <div class="detail-pic js">
+                    <div class="box">
+                        <input id="upload-pic" class="inputfile"/>
+                        <label for="upload-pic"><i class="fa fa-upload" aria-hidden="true"></i><span></span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bottom-mrg extra-mrg">
+                <form th:action="@{/donate/form/update}"
+                      th:object="${charityDonationDTO}"
+                      method="post"
+                      enctype="multipart/form-data">
+                    <div class="col-md-6 col-sm-6">
+
+                        <div class="input-group" th:classappend="${#fields.hasErrors('account')} ? 'has-error' : ''">
+                            <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                            <input type="text" class="form-control" th:field="*{account.fullName}" readonly>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" class="form-control" placeholder="Nhập số điện thoại..."
+                                   th:field="*{account.phone}" readonly>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input type="text" class="form-control" placeholder="Nhập Email..."
+                                   th:field="*{account.email}" readonly>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="progress">Trạng Thái</label>
+                            <select
+                                    id="progress"
+                                    class="form-control select2"
+                                    style="width: 100%"
+                                    th:field="*{progress}"
+                            >
+                                <option value="PENDING">Chờ Duyệt</option>
+                                <option value="CANCELED">Đã Hủy</option>
+                                <option value="APPROVED">Đã Duyệt</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-plus"></i></span>
+                            <input type="text" class="form-control"
+                                   th:field="*{charity.title}" readonly>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
+                                    <input type="date" class="form-control" th:field="*{charity.startDate}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
+                                    <input type="date" class="form-control" th:field="*{charity.endDate}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group" th:classappend="${#fields.hasErrors('note')} ? 'has-error' : ''">
+                            <span class="input-group-addon"><i class="fa fa-sticky-note"></i></span>
+                            <input type="text" class="form-control" th:field="*{note}" readonly>
+                        </div>
+                        <div class="input-group" th:classappend="${#fields.hasErrors('image')} ? 'has-error' : ''">
+                            <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
+                            <input type="file" style="height: 46px;" class="form-control" name="avatarMul" readonly>
+                        </div>
+                        <img style="margin-bottom: 10px; width: 150px; display: block; "
+                             th:src="@{${charityDonationDTO.image}}" alt="">
+                        <p
+                                class="invalid-feedback"
+                                th:if="${#fields.hasErrors('image')}"
+                                th:errors="*{image}"
+                        ></p>
+                    </div>
+                    <div class="row bottom-mrg extra-mrg">
+                        <div class="col-md-12 col-sm-12">
+                            <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
+                            <input type="hidden" name="charityId" class="form-control" th:field="*{charityId}"/>
+                            <button class="btn btn-success btn-primary small-btn">Lưu Kết Quả Duyệt</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- General Detail End -->
+
+    <div th:replace="~{fragments/front/footer :: footer}"></div>
+
+    <!-- Scripts
+    ================================================== -->
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/viewportchecker.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootsnav.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/select2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/wysihtml5-0.3.0.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/bootstrap-wysihtml5.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/datedropper.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/dropzone.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/loader.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/owl.carousel.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/slick.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/gmap3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/front/plugins/js/jquery.easy-autocomplete.min.js}"></script>
+    <script th:src="@{/resources/front/js/custom.js}"></script>
+    <script th:src="@{/resources/front/js/jQuery.style.switcher.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#styleOptions').styleSwitcher();
+        });
+
+    </script>
+    <script>
+        function openRightMenu() {
+            document.getElementById("rightMenu").style.display = "block";
+        }
+
+        function closeRightMenu() {
+            document.getElementById("rightMenu").style.display = "none";
+        }
+
+    </script>
+</div>
+</body>
+
+<!-- browse-jobs-grid41:26-->
+</html>

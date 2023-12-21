@@ -26,7 +26,6 @@ public class AccountMapperImpl implements AccountMapper {
     @Autowired
     AccountService accountService;
 
-
     @Override
     public AccountDTO toDTO(Account account) {
         if (account == null){
@@ -75,8 +74,9 @@ public class AccountMapperImpl implements AccountMapper {
         account.setFullName(accountDTO.getFullName());
         account.setEmail(accountDTO.getEmail());
         account.setPhone(accountDTO.getPhone());
-        account.setStatus(accountDTO.isStatus());
-        account.setRole(roleService.findById(accountDTO.getRoleId()));
+        if (accountDTO.getRoleId() != 0) {
+            account.setRole(roleService.findById(accountDTO.getRoleId()));
+        }
 
         return account;
     }

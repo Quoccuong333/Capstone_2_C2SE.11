@@ -51,118 +51,110 @@
                     <h1 class="page-header">Quản Lý Tài Khoản</h1>
                 </div>
             </div>
+
             <div class="row">
                 <div
                         class="alert alert-dismissible col-md-12"
                         th:if="${messageDTO != null && messageDTO.key == 'save'}"
-                        th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}"
-                >
-                    <button
-                            type="button"
-                            class="close"
-                            data-dismiss="alert"
-                            aria-hidden="true"
-                    >
-                        &times;
-                    </button>
+                        th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <h5><i class="icon fa fa-exclamation-triangle"></i> Thông Báo</h5>
                     <span th:text="${messageDTO.message}"></span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Thêm Tài Khoản
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form method="post"
-                                          th:action="@{/back/account/form}"
-                                          th:object="${accountDTO}">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="inputId">Mã Tài Khoản</label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="inputId"
-                                                           name="id"
-                                                           th:field="*{id}"
-                                                           disabled>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Thêm Tài Khoản
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form method="post"
+                                              th:action="@{/back/account/form}"
+                                              th:object="${accountDTO}">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="inputId">Mã Tài Khoản</label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="inputId"
+                                                               name="id"
+                                                               th:field="*{id}"
+                                                               disabled>
+                                                    </div>
+                                                    <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error' : ''">
+                                                        <label for="inputEmail"> Địa Chỉ Email<code>(*)</code></label>
+                                                        <input type="email"
+                                                               class="form-control"
+                                                               id="inputEmail"
+                                                               name="email"
+                                                               th:field="*{email}" >
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('email')}"
+                                                                th:errors="*{email}"
+                                                        ></p>
+                                                    </div>
+                                                    <div class="form-group" th:classappend="${#fields.hasErrors('fullName')} ? 'has-error' : ''">
+                                                        <label for="inputFullName">Họ & Tên <code>(*)</code></label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="inputFullName"
+                                                               name="fullName"
+                                                               th:field="*{fullName}">
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('fullName')}"
+                                                                th:errors="*{fullName}"
+                                                        ></p>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error' : ''">
-                                                    <label for="inputEmail"> Địa Chỉ Email<code>(*)</code></label>
-                                                    <input type="email"
-                                                           class="form-control"
-                                                           id="inputEmail"
-                                                           name="email"
-                                                           th:field="*{email}" >
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('email')}"
-                                                            th:errors="*{email}"
-                                                    ></p>
-                                                </div>
-                                                <div class="form-group" th:classappend="${#fields.hasErrors('fullName')} ? 'has-error' : ''">
-                                                    <label for="inputFullName">Họ & Tên <code>(*)</code></label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="inputFullName"
-                                                           name="fullName"
-                                                           th:field="*{fullName}">
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('fullName')}"
-                                                            th:errors="*{fullName}"
-                                                    ></p>
+                                                <div class="col-md-6">
+                                                    <div class="form-group" th:classappend="${#fields.hasErrors('fullName')} ? 'has-error' : ''">
+                                                        <label for="inputPhone">Số Điện Thoại <code>(*)</code></label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="inputPhone"
+                                                               name="phone"
+                                                               th:field="*{phone}">
+                                                        <p
+                                                                class="text-danger"
+                                                                th:if="${#fields.hasErrors('phone')}"
+                                                                th:errors="*{phone}"
+                                                        ></p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="role">Vai Trò</label>
+                                                        <select
+                                                                id="role"
+                                                                class="form-control"
+                                                                style="width: 100%"
+                                                                th:field="*{roleName}"
+                                                        >
+                                                            <option value="ADMIN">Admin</option>
+                                                            <option value="USER">User</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="status">Trạng Thái</label>
+                                                        <select
+                                                                id="status"
+                                                                class="form-control"
+                                                                style="width: 100%"
+                                                                th:field="*{status}"
+                                                        >
+                                                            <option value="true">Kích Hoạt</option>
+                                                            <option value="false">Tạm Ngưng</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group" th:classappend="${#fields.hasErrors('fullName')} ? 'has-error' : ''">
-                                                    <label for="inputPhone">Số Điện Thoại <code>(*)</code></label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           id="inputPhone"
-                                                           name="phone"
-                                                           th:field="*{phone}">
-                                                    <p
-                                                            class="text-danger"
-                                                            th:if="${#fields.hasErrors('phone')}"
-                                                            th:errors="*{phone}"
-                                                    ></p>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="role">Vai Trò</label>
-                                                    <select
-                                                            id="role"
-                                                            class="form-control"
-                                                            style="width: 100%"
-                                                            th:field="*{roleName}"
-                                                    >
-                                                        <option value="ADMIN">Admin</option>
-                                                        <option value="CHARITY">Charity</option>
-                                                        <option value="USER">User</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="status">Trạng Thái</label>
-                                                    <select
-                                                            id="status"
-                                                            class="form-control"
-                                                            style="width: 100%"
-                                                            th:field="*{status}"
-                                                    >
-                                                        <option value="true">Kích Hoạt</option>
-                                                        <option value="false">Tạm Ngưng</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
-                                        <button type="submit" class="btn btn-primary pull-right">Lưu Dữ Liệu</button>
-                                    </form>
+                                            <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
+                                            <button type="submit" class="btn btn-primary pull-right">Lưu Dữ Liệu</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -17,10 +17,10 @@
     <section class="login-screen-sec">
         <div class="container">
             <div class="login-screen">
-                <a href="/"><img th:src="@{/resources/front/img/logo.png}" class="img-responsive" alt=""></a>
+                <a href="/"><img th:src="@{/resources/front/img/logo-app.png}" class="img-responsive" alt=""></a>
 
                 <form th:action="@{/login}" method="post">
-                    <input type="email" class="form-control" placeholder="Tên Đăng Nhập" name="username">
+                    <input type="text" class="form-control" placeholder="Tên Đăng Nhập" name="username">
                     <input type="password" class="form-control" placeholder="Mật Khẩu" name="password">
 
                     <p style="color: red" th:if="${error}">Tên đăng nhập hoặc mật khẩu sai!</p>

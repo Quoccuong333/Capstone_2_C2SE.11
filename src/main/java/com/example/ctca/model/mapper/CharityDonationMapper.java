@@ -11,4 +11,6 @@ public interface CharityDonationMapper {
 
     List<CharityDonationDTO> toListDTO(List<CharityDonation> charityDonationList);
 
+    CharityDonation toEntity(CharityDonationDTO charityDonationDTO);
+
 }

@@ -16,7 +16,6 @@ public class RoleMapperImpl implements RoleMapper {
     @Autowired
     RoleService roleService;
 
-
     @Override
     public RoleDTO toDTO(Role role) {
         if (role == null){
